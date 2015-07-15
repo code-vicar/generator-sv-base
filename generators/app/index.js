@@ -1,8 +1,10 @@
 'use strict';
+var path = require('path');
 var yeoman = require('yeoman-generator');
 var chalk = require('chalk');
 var yosay = require('yosay');
 var _ = require('lodash');
+var _s = require('underscore.string');
 
 module.exports = yeoman.generators.Base.extend({
 
@@ -32,11 +34,22 @@ module.exports = yeoman.generators.Base.extend({
         }];
 
         this.prompt(prompts, function(props) {
+            this.packageName = _s.slugify(props.packageName);
             props.packageName = _.camelCase(props.packageName);
             this.props = props;
 
             done();
         }.bind(this));
+    },
+
+    configuring: {
+        enforceFolderName: function() {
+            if (this.packageName !== _.last(this.destinationRoot().split(path.sep))) {
+                this.destinationRoot(this.packageName);
+            }
+
+            this.config.save();
+        },
     },
 
     writing: {
