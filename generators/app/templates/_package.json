@@ -1,0 +1,11 @@
+{
+    "name": "<%= packageName %>",
+    "author": {
+        "name": "Scott Vickers",
+        "email": "",
+        "url": "https://github.com/code-vicar"
+    },
+    "version": "0.0.0",
+    "dependencies": {},
+    "private": true
+}
